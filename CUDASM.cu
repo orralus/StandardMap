@@ -3,11 +3,11 @@
 // Author      : Or Alus
 // Version     :
 // Copyright   :  This is a adaptaion to cuda of another program used to produce some of the results in https://journals.aps.org/pre/abstract/10.1103/PhysRevE.96.032204 if you use it, 
-					   //please cite that paper or as Alus Or, StandradMap, 2020 Github reposetory,  https://github.com/orralus/StandardMap.
+//		  Please cite that paper or as Alus Or, StandradMap, 2020 Github reposetory,  https://github.com/orralus/StandardMap.
 // Description : This is a cuda implementation to observe superdiffusion and survival probality in the presence of accelerator mode island in the standard map
-//					  The script was written in my Ph.D at the Physics Dept. at the Technion.
-//					  It  takes N initial condition at (x = [-0.01, 0.01], y=0) and uses the standard map (x', y') = (x + y + K sin(x), y + K sin(x)) on a torus to propegate to time T. 
-// 					  It gives an estimate for the diffusion coeficient and the survival probability (the probablitiy to stay on one side of the torus).
+//		 The script was written in my Ph.D at the Physics Dept. at the Technion.
+//		 It  takes N initial condition at (x = [-0.01, 0.01], y=0) and uses the standard map (x', y') = (x + y + K sin(x), y + K sin(x)) on a torus to propegate to time T. 
+// 		 It gives an estimate for the diffusion coeficient and the survival probability (the probablitiy to stay on one side of the torus).
 //============================================================================
 #include <iostream>
 #include <vector>
