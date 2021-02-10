@@ -2,7 +2,7 @@
 // Name  : CUDASM.cu
 // Author      : Or Alus
 // Version     :
-// Copyright   :  This is a adaptaion to cuda of another program used to produce some of the results in https://journals.aps.org/pre/abstract/10.1103/PhysRevE.96.032204 if you use it, 
+// Copyright   :  This is a adaptaion to cuda of another program of mine used to produce some of the results in https://journals.aps.org/pre/abstract/10.1103/PhysRevE.96.032204 if you use it, 
 //		  Please cite that paper or as Alus Or, StandradMap, 2020 Github reposetory,  https://github.com/orralus/StandardMap.
 // Description : This is a cuda implementation to observe superdiffusion and survival probality in the presence of accelerator mode island in the standard map
 //		 The script was written in my Ph.D at the Physics Dept. at the Technion.
