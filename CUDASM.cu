@@ -134,13 +134,13 @@ __global__ void generate_uniform_kernel(curandState *state, int n, double* resul
 	X[id] = x0 + Y[id];
 	if (sin(X[id]) * sin(x0) > 0){ //check for passing from one side of the torus to the other
 		tcounter[id] += 1;
-	} else {								//update survival probability
+	} else { //update survival probability
 		temp = tcounter[id]; 
 		tcounter[id] = 0;
 		atomicAdd(P + temp, 1);
 		atomicAdd(starters, 1);
 	}
-	Xsqr[id] = powf(X[id], 2);	//calculate variance
+	Xsqr[id] = powf(X[id], 2);	//calculate x^2
  }
  
 
@@ -243,7 +243,7 @@ int main(int argc, char** argv){
 		int Blocks=numBlocks;
         int TempN=N;
 		
-        //Use reduce sum to calculate <x^2>
+        //Use reduced sum to calculate <x^2>
 		
 		set_values_kernel<<<numBlocks, threadsPerBlock>>>(devTemp, 0.0, N);
         set_values_kernel<<<numBlocks, threadsPerBlock>>>(devTempnext, 0.0, N);
@@ -272,9 +272,8 @@ int main(int argc, char** argv){
         
 		delete [] Temp;
      }
-  
-
-	CUDA_CALL(cudaMemcpy(P,devP,sizeof(unsigned long long)*T,cudaMemcpyDeviceToHost)); 
+  // Copy from GPU to host
+    CUDA_CALL(cudaMemcpy(P,devP,sizeof(unsigned long long)*T,cudaMemcpyDeviceToHost)); 
     CUDA_CALL(cudaMemcpy(tcounter,devtcounter,sizeof(int)*N,cudaMemcpyDeviceToHost)); 
     CUDA_CALL(cudaMemcpy(&starters,devstarters,sizeof(unsigned long long),cudaMemcpyDeviceToHost)); 	
     
@@ -287,7 +286,8 @@ int main(int argc, char** argv){
     CUDA_CALL(cudaFree(devStates));
     CUDA_CALL(cudaFree(devTemp));
     
-	long long N0;
+    //write to file
+    long long N0;
     N0 = starters;
     long long sum = 0;
     for (ii = 0; ii < T; ii++) {
